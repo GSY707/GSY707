@@ -1,5 +1,7 @@
 ## Hi there 👋
 
+如果你觉得我可能对你的项目有帮助，你可以邀请我参加你的项目，只需要一个GPT pro
+
 <!--
 **GSY707/GSY707** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
