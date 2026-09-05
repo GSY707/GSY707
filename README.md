@@ -1,18 +1,38 @@
 ## Hi there 👋
 
-如果你觉得我可能对你的项目有帮助，你可以邀请我参加你的项目，只需要一个GPT pro
+## 主要项目介绍
 
-<!--
-**GSY707/GSY707** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+### Project-Yggdrasil 世界树计划
+这个项目主要实验了新的 agent-loop 和一个新记忆工具。
 
-Here are some ideas to get you started:
+实验结果：相比传统 agent-loop，这个 agent-loop 可以使 LLM 运行更长时间，做更多、更详细的工作。
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+#### 简要介绍
+这个项目主要做了两项工作
+
+##### 1.agent-loop 创新
+
+使用新的 agent-loop 减少任务执行过程中的上下文浪费，及时回收未来不再使用的 token，使得超长程任务不再刚需超大的上下文窗口。同时降低了任务执行成本。在执行过后，可以通过展开运行中压缩的上下文，获得更长的训练素材。
+
+##### 2.记忆工具创新
+
+设计了一种新的记忆工具，更适合复杂任务的推理。这个记忆工具不是传统的提供背景信息的笔记本，我们要求 LLM 将这个工具作为执行过程中的上下文。支持多个 agent 同时维护记忆，适合 agent 集群使用。
+
+局限性：需要更强大的 LLM 才能驾驭这个 agent-loop。（2026年6月的实验结论）。这个项目目前处于休眠阶段，并未产出客户可用的产品。
+
+### onmi-yggdrasil-test
+这个项目用于实验**世界树计划**中提出的一种新的 LLM，后来演变为新的 LLM 架构验证。
+
+目前主要验证这些东西：
+#### 生成方式
+对比 
+##### 单 token 生成：生成下一个词的概率分布，并随机选择。
+##### 多 token 生成：同时生成接下来多个词的概率分布，并随机选择。
+##### 单向量生成：生成一个向量，追加进序列后生成下一个向量。
+##### 多向量生成：生成多个向量，全部追加进序列后生成下一个批次。
+#### 推理介质
+对比
+##### 人类语言，与结果输出使用同一词表
+##### 机器语言，在训练过程中形成一种语言，人类不可读，且与结果输出使用不同词表
+#### 模型结构
+测试 Dense、FFN-Moe、Boundary-MoE 的作用。并测试一种多层的模型，比如 思考（60s/tick）-执行（1 tps）-反应（100 tps），这个例子利用3个模型同时运行，获得更快的反应，同时具有更强的思考能力。并在多层模型中测试类似 Moe 的思路，允许部分模型被关闭，并在运行中自我改变输入/输出流水线。
